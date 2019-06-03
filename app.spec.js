@@ -12,10 +12,20 @@ describe('api', () => {
     shell.exec('npx sequelize db:migrate:undo:all')
   });
 
-  describe('Test the root path', () => {
-    test('should return a 200', () => {
-      return request(app).get("/").then(response => {
+  describe('Test GET /api/v1/olympians path', () => {
+    test('should return a 200 status', () => {
+      return request(app).get("/api/v1/olympians").then(response => {
         expect(response.statusCode).toBe(200)
+      })
+    });
+    test('should return an array of olympian objects', () => {
+      return request(app).get("/api/v1/olympians").then(response => {
+        expect(response.body.length).toEqual(3242),
+        expect(Object.keys(response.body[0])).toContain('name')
+        expect(Object.keys(response.body[0])).toContain('team'),
+        expect(Object.keys(response.body[0])).toContain('age'),
+        expect(Object.keys(response.body[0])).toContain('sport')
+        expect(Object.keys(response.body[0])).toContain('total_medals_won')
       })
     });
   });
