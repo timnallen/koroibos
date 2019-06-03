@@ -5,13 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     team: DataTypes.STRING,
     age: DataTypes.INTEGER,
     sport: DataTypes.STRING,
-    total_medals_won: DataTypes.INTEGER,
     sex: DataTypes.STRING,
     height: DataTypes.INTEGER,
     weight: DataTypes.INTEGER
   }, {});
   Olympian.associate = function(models) {
-    // associations can be defined here
+    Olympian.belongsToMany(models.Event, { through: models.OlympianEvent });
   };
   return Olympian;
 };
