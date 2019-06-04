@@ -120,10 +120,10 @@ describe('api', () => {
         expect(Object.keys(response.body)).toContain('medalists')
         expect(Array.isArray(response.body.medalists)).toBe(true)
         expect(response.body.medalists.length).toBe(2)
-        expect(response.body.medalists[0]).toContain('name')
-        expect(response.body.medalists[0]).toContain('team')
-        expect(response.body.medalists[0]).toContain('age')
-        expect(response.body.medalists[0]).toContain('medal')
+        expect(Object.keys(response.body.medalists[0])).toContain('name')
+        expect(Object.keys(response.body.medalists[0])).toContain('team')
+        expect(Object.keys(response.body.medalists[0])).toContain('age')
+        expect(Object.keys(response.body.medalists[0])).toContain('medal')
       })
     });
   });
