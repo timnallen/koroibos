@@ -30,4 +30,23 @@ describe('api', () => {
       })
     });
   });
+
+  describe('Test GET /api/v1/olympians?age=youngest path', () => {
+    test('should return a 200 status', () => {
+      return request(app).get("/api/v1/olympians?age=youngest").then(response => {
+        expect(response.statusCode).toBe(200)
+      })
+    });
+    test('should return an array of olympian objects', () => {
+      return request(app).get("/api/v1/olympians?age=youngest").then(response => {
+        expect(response.body.olympians.length).toEqual(1),
+        expect(Object.keys(response.body.olympians[0])).toContain('name')
+        expect(Object.keys(response.body.olympians[0])).toContain('team'),
+        expect(Object.keys(response.body.olympians[0])).toContain('age'),
+        expect(Object.keys(response.body.olympians[0])).toContain('sport')
+        expect(Object.keys(response.body.olympians[0])).toContain('total_medals_won')
+        expect(response.body.olympians[0].name).toBe('John Doe')
+      })
+    });
+  });
 });
