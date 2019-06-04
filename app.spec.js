@@ -106,4 +106,25 @@ describe('api', () => {
       })
     });
   });
+
+  describe('Test GET /api/v1/events/:id/medalists', () => {
+    test('should return a 200 status', () => {
+      return request(app).get("/api/v1/events/1/medalists").then(response => {
+        expect(response.statusCode).toBe(200)
+      })
+    });
+
+    test('should return an object of stats', () => {
+      return request(app).get("/api/v1/events/1/medalists").then(response => {
+        expect(response.body.event).toBe("Archery Men's Individual")
+        expect(Object.keys(response.body)).toContain('medalists')
+        expect(Array.isArray(response.body.medalists)).toBe(true)
+        expect(response.body.medalists.length).toBe(2)
+        expect(response.body.medalists[0]).toContain('name')
+        expect(response.body.medalists[0]).toContain('team')
+        expect(response.body.medalists[0]).toContain('age')
+        expect(response.body.medalists[0]).toContain('medal')
+      })
+    });
+  });
 });
