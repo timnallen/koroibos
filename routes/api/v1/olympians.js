@@ -43,6 +43,7 @@ router.get("/", function(req, res, next) {
   } else if (req.query.age === 'oldest') {
     Olympian.max('age').then(age => {
       Olympian.findAll({
+        where: { age: age },
         include: [{
           model: OlympianEvent,
           where: { medal: {[Op.not]: 'NA'}},
