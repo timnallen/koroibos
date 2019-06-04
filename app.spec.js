@@ -100,7 +100,7 @@ describe('api', () => {
         expect(response.body.events.length).toBe(2)
         expect(Object.keys(response.body.events[0])).toContain('sport')
         expect(Object.keys(response.body.events[0])).toContain('events')
-        expect(response.body.events[0].events).toBe(Array)
+        expect(Array.isArray(response.body.events[0].events)).toBe(true)
         expect(response.body.events[0].events.length).toBe(3)
         expect(response.body.events[1].events.length).toBe(3)
       })
