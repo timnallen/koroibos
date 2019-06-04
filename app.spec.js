@@ -87,4 +87,23 @@ describe('api', () => {
       })
     });
   });
+
+  describe('Test GET /api/v1/events', () => {
+    test('should return a 200 status', () => {
+      return request(app).get("/api/v1/events").then(response => {
+        expect(response.statusCode).toBe(200)
+      })
+    });
+
+    test('should return an object of stats', () => {
+      return request(app).get("/api/v1/events").then(response => {
+        expect(response.body.events.length).toBe(2)
+        expect(Object.keys(response.body.events[0])).toContain('sport')
+        expect(Object.keys(response.body.events[0])).toContain('events')
+        expect(response.body.events[0].events).toBe(Array)
+        expect(response.body.events[0].events.length).toBe(3)
+        expect(response.body.events[1].events.length).toBe(3)
+      })
+    });
+  });
 });
