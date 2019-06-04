@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     weight: DataTypes.INTEGER
   }, {});
   Olympian.associate = function(models) {
-    Olympian.belongsToMany(models.Event, { through: models.OlympianEvent });
+    Olympian.hasMany(models.OlympianEvent, { onDelete: 'cascade' })
+    Olympian.belongsToMany(models.Event, { through: models.OlympianEvent, foreignKey: models.OlympianId });
   };
   return Olympian;
 };
