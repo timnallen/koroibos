@@ -5,6 +5,7 @@ module.exports = {
 
     return queryInterface.bulkInsert('Events', [{
       title: "Archery Men's Individual",
+      id: 1,
       sport: 'Archery',
       createdAt: new Date(),
       updatedAt: new Date()
