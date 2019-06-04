@@ -49,4 +49,12 @@ describe('api', () => {
       })
     });
   });
+
+  describe('Test GET /api/v1/olympian_stats', () => {
+    test('should return a 200 status', () => {
+      return request(app).get("/api/v1/olympian_stats").then(response => {
+        expect(response.statusCode).toBe(200)
+      })
+    });
+  });
 });
