@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     sport: DataTypes.STRING
   }, {});
   Event.associate = function(models) {
-    Event.belongsToMany(models.Olympian, { through: models.OlympianEvent });
+    Event.hasMany(models.OlympianEvent, { onDelete: 'cascade' })
+    Event.belongsToMany(models.Olympian, { through: models.OlympianEvent, foreign_key: models.EventId });
   };
   return Event;
 };
