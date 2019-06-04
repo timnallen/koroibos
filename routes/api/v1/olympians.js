@@ -10,6 +10,11 @@ var OlympianEvent = require('../../../models').OlympianEvent;
 router.get("/", async function(req, res, next) {
   res.setHeader("Content-Type", "application/json");
   Olympian.findAll({
+    include: [{
+      model: OlympianEvent,
+      where: { medal: {[Op.not]: 'NA'}},
+      required: false
+    }],
     attributes: ['name', 'team', 'age', 'sport']
   })
     .then(olympians => {
@@ -19,7 +24,7 @@ router.get("/", async function(req, res, next) {
           team: olympian.team,
           age: olympian.age,
           sport: olympian.sport,
-          total_medals_won: 1
+          total_medals_won: olympian.OlympianEvents.length
         };
         return formattedOlympian;
       })
