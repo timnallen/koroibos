@@ -4,9 +4,28 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     sport: DataTypes.STRING
   }, {});
+
   Event.associate = function(models) {
     Event.hasMany(models.OlympianEvent, { onDelete: 'cascade' })
     Event.belongsToMany(models.Olympian, { through: models.OlympianEvent, foreign_key: models.EventId });
   };
+
+  Event.eventsBySport = function() {
+    return Event.findAll({
+      attributes: [
+        'sport',
+        [sequelize.fn('array_agg', sequelize.col('title')), 'events']
+      ],
+      group: ['Event.sport']
+    });
+  };
+
+  Event.eventById = function(id) {
+    return Event.findOne({
+      where: { id },
+      attributes: ['title']
+    });
+  };
+
   return Event;
 };
