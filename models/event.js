@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       ],
       group: ['Event.sport']
     });
-  }
+  };
 
   Event.eventById = function(id) {
     return Event.findOne({
       where: { id },
       attributes: ['title']
     });
-  }
+  };
 
   return Event;
 };
