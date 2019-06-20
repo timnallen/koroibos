@@ -21,10 +21,7 @@ router.get("/", async function(req, res, next) {
 router.get("/:id/medalists", async function (req, res, next) {
   res.setHeader("Content-Type", "application/json");
   try {
-    const eventById = await Event.findOne({
-      where: { id: req.params.id },
-      attributes: ['title']
-    });
+    const eventById = await Event.eventById(req.params.id);
     const olympiansWithMedal = await OlympianEvent.findAll({
       where: {
         EventId: req.params.id,
