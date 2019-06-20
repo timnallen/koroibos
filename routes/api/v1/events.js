@@ -10,13 +10,7 @@ var OlympianEvent = require('../../../models').OlympianEvent;
 router.get("/", async function(req, res, next) {
   res.setHeader("Content-Type", "application/json");
   try {
-    const events = await Event.findAll({
-      attributes: [
-        'sport',
-        [sequelize.fn('array_agg', sequelize.col('title')), 'events']
-      ],
-      group: ['Event.sport']
-    });
+    const events = await Event.eventsBySport();
     res.status(200).send({ events });
   } catch (error) {
     console.log(error)
