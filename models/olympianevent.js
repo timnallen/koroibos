@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       }]
     });
 
-    return olympiansWithMedal.map(function (olympian) {
+    return medalistFormatter(olympiansWithMedal);
+  };
+
+  function medalistFormatter(olympians) {
+    return olympians.map(function (olympian) {
       return {
         name: olympian.Olympian.name,
         team: olympian.Olympian.team,
